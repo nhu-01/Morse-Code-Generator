@@ -1,29 +1,39 @@
 #include <iostream>
 #include <string>
 #include "morse_tree.h"
+using namespace std;
 
 int main() {
-    MorseTree<char> tree("morse_table.txt");
+    MorseTree<char> tree("morse_table.txt"); // Load Morse table
+    string input;
 
-    std::string input;
-
-    std::cout << "Morse Code Translator (type 'exit' to quit)\n";
+    cout << "Morse Code Generator — type 'exit' to quit\n";
 
     while (true) {
-        std::cout << "\nEnter text: ";
-        std::getline(std::cin, input);
+        cout << "\nEnter text or Morse code:\n> ";
+        getline(cin, input);
 
-        if (input == "exit") break; // type 'exit' to quit
+        if (input == "exit") break;
 
-        std::string encoded = tree.encodeText(input);
-        std::cout << "Morse Code: " << encoded << std::endl;
+        // Detect if input is Morse code
+        bool isMorse = true;
+        for (char ch : input) {
+            if (ch != '.' && ch != '-' && ch != ' ' && ch != '/') {
+                isMorse = false;
+                break;
+            }
+        }
 
-        std::string decoded = tree.decodeText(encoded);
-        std::cout << "Decoded text: " << decoded << std::endl;
+        if (isMorse) {
+            string decoded = tree.decodeText(input);
+            cout << "Decoded text: " << decoded << endl;
+        } else {
+            string encoded = tree.encodeText(input);
+            cout << "Morse Code: " << encoded << endl;
+        }
     }
 
-    std::cout << "Goodbye!\n";
+    cout << "Goodbye!\n";
     return 0;
 }
-
 

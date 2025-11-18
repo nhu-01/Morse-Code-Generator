@@ -27,5 +27,4 @@ public:
     string decodeText(const string& code) const;
 };
 
-#include "morse_tree.cpp"
 #endif

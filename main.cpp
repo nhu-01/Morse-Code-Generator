@@ -3,19 +3,27 @@
 #include "morse_tree.h"
 
 int main() {
-    // Load Morse codes from your CSV file
     MorseTree<char> tree("morse_table.txt");
 
     std::string input;
-    std::cout << "Type text to encode to Morse (letters A-Z, digits 0-9, spaces allowed): ";
-    std::getline(std::cin, input);
 
-    std::string encoded = tree.encodeText(input);
-    std::cout << "Morse Code: " << encoded << std::endl;
+    std::cout << "Morse Code Translator (type 'exit' to quit)\n";
 
-    // Optional: decode back to text
-    std::string decoded = tree.decodeText(encoded);
-    std::cout << "Decoded text: " << decoded << std::endl;
+    while (true) {
+        std::cout << "\nEnter text: ";
+        std::getline(std::cin, input);
 
+        if (input == "exit") break; // type 'exit' to quit
+
+        std::string encoded = tree.encodeText(input);
+        std::cout << "Morse Code: " << encoded << std::endl;
+
+        std::string decoded = tree.decodeText(encoded);
+        std::cout << "Decoded text: " << decoded << std::endl;
+    }
+
+    std::cout << "Goodbye!\n";
     return 0;
 }
+
+
